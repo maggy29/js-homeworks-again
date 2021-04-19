@@ -9,39 +9,76 @@ const testMarkup =
 testContainer.insertAdjacentHTML("beforeend", testMarkup);
 
 const test = document.querySelector(".test-form");
-test.addEventListener("submit", handleCheckTest);
+test.addEventListener("submit", handleTestSubmit);
 
-function handleCheckTest(e) {
+function handleTestSubmit(e) {
   e.preventDefault();
+
   const userData = [...test.elements]
     .filter((el) => el.checked)
-    .map((el) => el.value);
-  const answerData = questions.map(({ answer }) => answer);
-  makeAnswersReviewModal(questions, userData);
+    .map((el) => [el.dataset.id]);
+  const results = checkTest(userData, questions);
+  addClassList(results);
+  makeAnswersReviewModal(results, questions);
+  //makeReset(e, userData);
 }
+function checkTest(userData, servData) {
+  const results = { result: [...userData], right: 0, wrong: 0 };
 
-function makeAnswersReviewModal(dataServ, dataUser) {
-  let right = 0;
-  let wrong = 0;
-  let modalText = "";
-  dataServ.forEach((el, idx, arr) => {
-    if (arr[idx].answer === dataUser[idx]) {
-      right += 1;
+  servData.forEach((el, idx, arr) => {
+    if (`${arr[idx].id}${arr[idx].answerIdx}` === userData[idx][0]) {
+      results.result[idx].push(true);
+      results.right += 1;
     } else {
-      wrong += 1;
-      modalText += `<p>Your answer "${dataUser[idx]}" on question "${el.question}" is not correct. Try again!</p>`;
+      results.result[idx].push(false);
+      results.wrong += 1;
     }
   });
-  modalText += `<h4>You have ${right} right answers from ${dataServ.length}!</h4>`;
+  return results;
+}
+function addClassList({ result }) {
+  const prevValidAnswers = test.querySelectorAll(".valid");
+  prevValidAnswers.forEach((answer) => answer.classList.remove("valid"));
+  const prevInvalidAnswers = test.querySelectorAll(".invalid");
+  prevInvalidAnswers.forEach((answer) => answer.classList.remove("invalid"));
+  result.forEach((res) => {
+    const userChoiсe = test.querySelector(`input[data-id="${res[0]}"]`);
+    const parentLabel = userChoiсe.closest("label");
+
+    if (res[1]) {
+      parentLabel.classList.add("valid");
+    } else {
+      parentLabel.classList.add("invalid");
+    }
+  });
+}
+function makeAnswersReviewModal({ right }, questions) {
+  let modalText = "";
+  if (right === questions.length) {
+    modalText = "All Your answers are right!!! Well-done!!!";
+  } else if (right / questions.length >= 0.5) {
+    modalText = `You have ${right} right answer(s) from ${questions.length}! It is not bad, but You can show better results! Try again!`;
+  } else if (right / questions.length < 0.5 && right !== 0) {
+    modalText = `You have ${right} right answer(s) from ${questions.length}! Your results far from perfect, but You can try again and do Your best!`;
+  } else {
+    modalText =
+      "You have no right answers... Do not panic! Keep calm and try again!";
+  }
+
   const modalMarkup = `<div class="backdrop js-backdrop">
       <div class="modal">
         <h2>Your result</h2>
-        ${modalText}
+        <h4>${modalText}</h4>
         <button type="button" class="button" data-action="close-modal">
           Close
         </button>
       </div>
     </div>`;
+
+  const prevModal = document.querySelector(".js-backdrop");
+  if (prevModal) {
+    prevModal.remove();
+  }
   testContainer.insertAdjacentHTML("afterbegin", modalMarkup);
   openTestModal();
   const closeTestModalBtn = document.querySelector(
@@ -57,7 +94,7 @@ function openTestModal() {
   window.addEventListener("keydown", closeTestModalByEsc);
 }
 
-function closeTestModal() {
+function closeTestModal(modalText) {
   document.body.classList.remove("show-modal");
 }
 
@@ -85,12 +122,12 @@ function makeOneTestMarkup({ id, question, vars }) {
 }
 
 function makeVarsMarkup(id, vars) {
-  return vars.reduce((acc, el) => acc + makeVarMarkup(id, el), "");
+  return vars.reduce((acc, el, idx) => acc + makeVarMarkup(id, el, idx), "");
 }
 
-function makeVarMarkup(id, el) {
+function makeVarMarkup(id, el, idx) {
   return `<label class="label test__label">
-    <input type="radio" class="radio" name="${id}" value="${el}" />
+    <input type="radio" class="radio" data-id="${id}${idx}" name="${id}" value="${el}" />
     ${el}
     </label>`;
 }

@@ -29,6 +29,17 @@ body {
   cursor: pointer;
 }
 
+.label.invalid {
+  border: 2px solid #f43333;
+  border-radius: 6px;
+}
+
+.label.valid {
+  background-color: ;
+  border: 2px solid #33f433;
+  border-radius: 6px;
+}
+
 .register-form__label {
   margin-bottom: 16px;
 }
@@ -140,8 +151,8 @@ body.show-modal .modal {
   transform: scale(1.1);
   transition: transform 200ms ease-in-out;
 }
-© 2021 GitHub,
-Inc. #validation-input {
+
+#validation-input {
   border: 3px solid #bdbdbd;
 }
 
