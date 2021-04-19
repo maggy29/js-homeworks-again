@@ -49,25 +49,33 @@ function custDebounce(callback, delay) {
   };
 }
 
-// const sectionList = document.querySelectorAll(".section");
-// //const options = { threshold: 0.5 };
+const wrapper = document.querySelector(".sections");
+const input = document.querySelector(".input");
 
-// const sectionObserver = new IntersectionObserver(onEntry, {});
-// sectionList.forEach((section) => sectionObserver.observe(section));
+input.addEventListener(
+  "input",
+  (e) => (wrapper.style.height = `${e.target.value}px`)
+);
 
-// function onEntry(entries) {
-//   entries.forEach((entry) => {
-//     if (entry.isIntersecting) {
-//       const entryId = entry.target.dataset.id;
-//       const navCurrentActive = document.querySelector(".active");
-//       const navNextActive = document.querySelector(`li[data-id="${entryId}"]`);
-//       if (navCurrentActive) {
-//         navCurrentActive.classList.remove("active");
-//       }
-//       navNextActive.classList.add("active");
-//     }
-//   });
-// }
+const sectionList = document.querySelectorAll(".section");
+const options = { threshold: 0.5 };
+
+const sectionObserver = new IntersectionObserver(onEntry, {});
+sectionList.forEach((section) => sectionObserver.observe(section));
+
+function onEntry(entries) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const entryId = entry.target.dataset.id;
+      const navCurrentActive = document.querySelector(".active");
+      const navNextActive = document.querySelector(`li[data-id="${entryId}"]`);
+      if (navCurrentActive) {
+        navCurrentActive.classList.remove("active");
+      }
+      navNextActive.classList.add("active");
+    }
+  });
+}
 
 const imgList = document.querySelectorAll(".leftimg");
 
