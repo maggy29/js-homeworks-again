@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>events-delagation</title>
+    <link rel="stylesheet" href="./css/event-delegation.css" />
+  </head>
+  <body>
+    <p><a href="index.html">На главную</a></p>
+
+    <header class="masthead">
+      <ul class="nav js-nav">
+        <li class="nav__item">
+          <a href="" class="nav__link">Home</a>
+        </li>
+        <li class="nav__item">
+          <a href="" class="nav__link">Blog</a>
+        </li>
+        <li class="nav__item">
+          <a href="" class="nav__link">Contact</a>
+        </li>
+        <li class="nav__item">
+          <a href="" class="nav__link">About</a>
+        </li>
+      </ul>
+    </header>
+
+    <hr />
+
+    <div class="tags js-tags">
+      <button class="tags__item" data-tag="html">HTML</button>
+      <button class="tags__item" data-tag="css">CSS</button>
+      <button class="tags__item" data-tag="javascript">JavaScript</button>
+      <button class="tags__item" data-tag="npm">NPM</button>
+      <button class="tags__item" data-tag="babel">Babel</button>
+      <button class="tags__item" data-tag="webpack">Webpack</button>
+      <button class="tags__item" data-tag="react">React</button>
+      <button class="tags__item" data-tag="redux">Redux</button>
+      <button class="tags__item" data-tag="node">Node</button>
+    </div>
+
+    <hr />
+
+    <form class="editor js-editor">
+      <input class="editor__input" type="text" name="text" />
+      <button class="button" type="submit">Сохранить</button>
+    </form>
+
+    <ul class="todo-list js-todo-list"></ul>
+
+    <script src="./js/events-delegation-nav.js" type="module"></script>
+    <script src="./js/events-delegation-tags.js" type="module"></script>
+    <script src="./js/event-delegation-todos.js" type="module"></script>
+  </body>
+</html>
