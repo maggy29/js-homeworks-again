@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11th-timers-promise-api</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="timer">
+      <p class="clockface js-clockface">00:00:00</p>
+
+      <div class="actions">
+        <button class="btn" data-action="start-timer">Start</button>
+        <button class="btn" data-action="stop-timer">Stop</button>
+      </div>
+    </div>
+    <div class="color">
+      <button type="button" class="btn" data-action="start-color">
+        Start Color
+      </button>
+      <button type="button" class="btn" data-action="stop-color">
+        Stop Color
+      </button>
+    </div>
+
+    <div id="timer-1" class="container">
+      <h1 class="text">to Birthday of My Busic</h1>
+      <div class="cd-timer">
+        <div class="field days">
+          <span class="value" data-value="days">11</span><br />
+          <span class="label">Days</span>
+        </div>
+
+        <div class="field hours">
+          <span class="value" data-value="hours">11</span>
+          <span class="label">Hours</span>
+        </div>
+
+        <div class="field mins">
+          <span class="value" data-value="mins">11</span>
+          <span class="label">Minutes</span>
+        </div>
+
+        <div class="field secs">
+          <span class="value" data-value="secs">11</span>
+          <span class="label">Seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="./js/intro.js" type="module"></script>
+    <script src="./js/cart.js" type="module"></script> -->
+    <!-- <script src="./js/horses.js" type="module"></script> -->
+    <!-- <script src="./js/timerIntro.js" type="module"></script> -->
+    <script src="./js/promisification.js" type="module"></script>
+    <script src="./js/timer.js" type="module"></script>
+    <script src="./js/color.js" type="module"></script>
+    <script src="./js/clockdown.js" type="module"></script>
+  </body>
+</html>
