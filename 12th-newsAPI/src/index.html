@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>12-th</title>
+  </head>
+
+  <body>
+    <form class="js-form">
+      <input
+        type="text"
+        class="query"
+        name="query"
+        placeholder="Your request"
+      />
+      <button class="submit">Submit</button>
+    </form>
+    <ul class="news-list"></ul>
+    <button class="js-load-more">Load more</button>
+
+    <div class="js-backdrop is-hidden">
+      <div class="loader">
+        <span>Loading...</span>
+      </div>
+    </div>
+    <div class="country">
+      <input
+        class="country-query js-country-query"
+        type="text"
+        placeholder="Type country name here..."
+      />
+      <div class="country-response js-country-response"></div>
+    </div>
+  </body>
+</html>
